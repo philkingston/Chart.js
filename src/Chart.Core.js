@@ -1878,6 +1878,12 @@
 			 * https://dl.dropboxusercontent.com/u/34601363/yeahscience.gif
 			 */
 
+			this.labelsShort = []
+			for(var l in this.labels) {
+				this.labelsShort[l] = this.labels[l];
+				if(this.labelsShort[l].length > 6)
+					this.labelsShort[l] = this.labelsShort[l].substring(0, 6) + '...';
+			}
 
 			// Get maximum radius of the polygon. Either half the height (minus the text width) or half the width.
 			// Use this to calculate the offset + change. - Make sure L/R protrusion is at least 0 to stop issues with centre points
@@ -1901,7 +1907,7 @@
 			for (i=0;i<this.valuesCount;i++){
 				// 5px to space the text slightly out - similar to what we do in the draw function.
 				pointPosition = this.getPointPosition(i, largestPossibleRadius);
-				textWidth = this.ctx.measureText(template(this.templateString, { value: this.labels[i] })).width + 5;
+				textWidth = this.ctx.measureText(template(this.templateString, { value: this.labelsShort[i] })).width + 5;
 				if (i === 0 || i === this.valuesCount/2){
 					// If we're at index zero, or exactly the middle, we're at exactly the top/bottom
 					// of the radar chart, so text will be aligned centrally, so we'll half it and compare
@@ -2073,7 +2079,7 @@
 							ctx.textBaseline = 'top';
 						}
 
-						ctx.fillText(this.labels[i], pointLabelPosition.x, pointLabelPosition.y);
+						ctx.fillText(this.labelsShort[i], pointLabelPosition.x, pointLabelPosition.y);
 					}
 				}
 			}

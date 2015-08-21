@@ -120,6 +120,7 @@
 						value : dataPoint,
 						label : data.labels[index],
 						datasetLabel: dataset.label,
+						url: !!data.urls ? data.urls[index] : null,
 						x: (this.options.animation) ? this.scale.xCenter : pointPosition.x,
 						y: (this.options.animation) ? this.scale.yCenter : pointPosition.y,
 						strokeColor : dataset.pointStrokeColor,
@@ -192,6 +193,7 @@
 				ctx : this.chart.ctx,
 				templateString: this.options.scaleLabel,
 				labels: data.labels,
+				urls: data.urls,
 				valuesCount: data.datasets[0].data.length
 			});
 
